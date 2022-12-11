@@ -1,0 +1,70 @@
+
+三個空間:
+本機開發環境空間
+linux VM空間
+container空間
+
+Docker Registry:存放docker image地方,例如官方docker hub目前最大的registry, 公司私有registry
+
+image名稱格式
+[user name]使用者名稱/[repo name]倉庫名稱:[tag name]
+EX:gmkcup/gmkcupTestimage:ubuntu14
+
+
+列出本機image
+docker images 
+
+
+
+將image 存入(備份)本機環境
+docker save -o xxx.tar 前墜詞(帳號名)/image名稱
+
+將本機tar檔還原docker image
+docker load --input webdemou12.tar
+
+刪除image(如果有容器還在使用這個映像檔，則無法刪除, 需要rm容器後才可rmi image)
+docker rmi 
+
+
+image加入tag
+同一性質的image若要區分例如版本的概念, 可以加入tag進行區分, ex:現行Ubuntu12+Spring2, 
+後續若要建ubuntu14+Spring 則可利用tag 方式進行同一image不同tag的存放方式
+
+docker tag joshhu/webdemo:latest joshhu/webdemo:u14
+
+
+
+docker container run(create)
+
+
+docker container kill
+刪除執行中的Container, 但仍存在於container
+
+
+docker container stop
+
+docker container start
+
+
+查看container
+docker container ps :列出正在執行的container, 
+
+docker container ps -a: 列出已經執行完，死掉但還沒消失的Container, 未加-a則僅可看到正在執行的container
+
+docker containser -t:Container的螢幕會接到原來的螢幕上使其具備輸出功能
+docker containser -i:鍵盤輸入會被Container接手使其具備輸入功能
+上述用法可直接合併使用docker container -it: 這個Container就具備了標準的輸入(即你目前使用的鍵盤)和輸出(標準的Linux輸出，即目前操作的終端視窗)。
+使用後可進入containser內部操作介面
+
+docker container -d :可使用-d 參數將container丟背景常駐服務
+
+組合用法
+docker run -d -itd -p 8080:80 --name mkcuphttp httpd
+
+
+
+執行容器
+docker container run image名稱
+
+
+
